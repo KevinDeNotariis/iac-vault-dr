@@ -72,8 +72,10 @@ pipeline {
           }
           steps {
             withEnv(["VAULT_TOKEN=${DEV_VAULT_TOKEN}"]) {
-              sh "make terraform/init"
-              sh "make terraform/plan"
+              withAWS(region: 'us-east-1', credentials: 'my-aws-credentials') {
+                sh "make terraform/init"
+                sh "make terraform/plan"
+              }
             }
           }
         }
@@ -83,8 +85,10 @@ pipeline {
           }
           steps {
             withEnv(["VAULT_TOKEN=${STAGE_VAULT_TOKEN}"]) {
-              sh "make terraform/init"
-              sh "make terraform/plan"
+              withAWS(region: 'us-east-1', credentials: 'my-aws-credentials') {
+                sh "make terraform/init"
+                sh "make terraform/plan"
+              }
             }
           }
         }
@@ -94,8 +98,10 @@ pipeline {
           }
           steps {
             withEnv(["VAULT_TOKEN=${PROD_VAULT_TOKEN}"]) {
-              sh "make terraform/init"
-              sh "make terraform/plan"
+              withAWS(region: 'us-east-1', credentials: 'my-aws-credentials') {
+                sh "make terraform/init"
+                sh "make terraform/plan"
+              }
             }
           }
         }
@@ -119,9 +125,11 @@ pipeline {
           }
           steps {
             withEnv(["VAULT_TOKEN=${DEV_VAULT_TOKEN}"]) {
-              sh "make terraform/init"
-              sh "make terraform/plan"
-              sh "make terraform/apply"
+              withAWS(region: 'us-east-1', credentials: 'my-aws-credentials') {
+                sh "make terraform/init"
+                sh "make terraform/plan"
+                sh "make terraform/apply"
+              }
             }
           }
         }
@@ -131,9 +139,11 @@ pipeline {
           }
           steps {
             withEnv(["VAULT_TOKEN=${STAGE_VAULT_TOKEN}"]) {
-              sh "make terraform/init"
-              sh "make terraform/plan"
-              sh "make terraform/apply"
+              withAWS(region: 'us-east-1', credentials: 'my-aws-credentials') {
+                sh "make terraform/init"
+                sh "make terraform/plan"
+                sh "make terraform/apply"
+              }
             }
           }
         }
@@ -143,9 +153,11 @@ pipeline {
           }
           steps {
             withEnv(["VAULT_TOKEN=${PROD_VAULT_TOKEN}"]) {
-              sh "make terraform/init"
-              sh "make terraform/plan"
-              sh "make terraform/apply"
+              withAWS(region: 'us-east-1', credentials: 'my-aws-credentials') {
+                sh "make terraform/init"
+                sh "make terraform/plan"
+                sh "make terraform/apply"
+              }
             }
           }
         }
